@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         counter: 0,
+        value: 0
     },
     getters: {
         doubleCounter: state => {
@@ -13,7 +14,10 @@ export default new Vuex.Store({
         },
         expoCounter: state => {
             return state.counter * 4;
-        }
+        },
+        value: state => {
+            return state.value;
+        },
     },
     mutations: {
         increment: (state, playload) => {
@@ -21,6 +25,9 @@ export default new Vuex.Store({
         },
         decrement: (state, playload) => {
             state.counter -= playload;
+        },
+        updateValue: (state, payload) => {
+            state.value = payload;
         },
     },
     actions: {
@@ -41,5 +48,8 @@ export default new Vuex.Store({
                 commit('decrement', playload.by);
             }, playload.duration)
         },
+        updateValue: ({ commit }, payload) => {
+            commit('updateValue', payload);
+        }
     }
 });
